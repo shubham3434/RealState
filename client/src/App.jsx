@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Preview from './pages/Preview'
 import Layout from './components/Layout'
@@ -8,6 +6,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Home from './pages/Home'
 import Container from './components/Container'
 import Propertylistings from './pages/PropertyLiisting.jsx'
+import PropertyDetails from './pages/Propertydeatils.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,7 +16,10 @@ function App() {
       <Route path='' element={<Preview/>}/>
       <Route path='user' element={<Layout/>}>
            <Route path='home' element={<Home/>}></Route>
-           <Route path='property' element={<Propertylistings/>}/>
+      </Route>
+      <Route path='property' element={<Layout/>}>
+        <Route path='listings' element={<Propertylistings/>}/>
+        <Route path='details/:id' element={<PropertyDetails/>}/>
       </Route>
     </Route>
   ))

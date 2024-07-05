@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import image1 from "../assets/propertyImages/image1.jpg"
+import { useNavigate } from "react-router-dom";
+
 function Propertylistings(){
 
       const [PropertyDetails , setPropertyDetails] = useState([])
@@ -14,6 +16,11 @@ function Propertylistings(){
         })
       },[])
 
+      const navigate = useNavigate()
+      const showDeatils = (propertyId)=>{
+       navigate(`/property/details/${propertyId}`)
+      }
+
     if(loading) return(
       <div>Loading.......</div>
     )
@@ -22,7 +29,7 @@ function Propertylistings(){
         <div className="flex justify-center bg-gray-200  p-4 ">
             <div className=" grid grid-cols-4 gap-x-6 gap-y-6">
             {PropertyDetails.map((item)=>(
-              <div key={item._id} className="w-[300px]  bg-white rounded-xl ">
+              <div key={item._id} onClick={()=>{showDeatils(item._id)}} className="w-[300px]  bg-white rounded-xl ">
                 <div className="mb-4"><img src={item.images[0]} alt="" /></div>
                 <div className="p-3">
                 <p className="text-2xl mb-4">{item.title}</p>
