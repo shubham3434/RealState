@@ -22,7 +22,7 @@ function Propertylistings(){
         <div className="flex justify-center bg-gray-200  p-4 ">
             <div className=" grid grid-cols-4 gap-x-6 gap-y-6">
             {PropertyDetails.map((item)=>(
-              <div key={item._id} className="w-[300px] bg-white rounded-xl ">
+              <div key={item._id} className="w-[300px]  bg-white rounded-xl ">
                 <div className="mb-4"><img src={item.images[0]} alt="" /></div>
                 <div className="p-3">
                 <p className="text-2xl mb-4">{item.title}</p>
@@ -33,7 +33,7 @@ function Propertylistings(){
                 </div>
                 <div>
                 <span className="pr-2">Seller:</span>
-                <span>{item.seller}</span>
+                <span>{item.sellername}</span>
                 </div>
                 <div>
                   <span className="pr-2">Price</span>

@@ -6,19 +6,19 @@ import { Property } from '../models/property.models.js'
 const getAllProperties = asyncHandler(async(req,res)=>{
 
     let data = await Property.find({}).select("-bedroom -bathrooms ")
-     data.forEach( async (element)=>{
-            const sellerId = element.seller
-            const user = await User.findById(sellerId)
-            console.log(user);
-            element.sellername = user.username
-            return element
-    }
-    )
+    
+    let propertyList = await Promise.all(data.map(async (element) =>{
+            let propertyObject = element.toObject()
+            const user = await User.findById(propertyObject.seller)
+            if(user) propertyObject.sellername = user.username
+            return propertyObject
+    }))
+
     return res.status(200)
     .json(
         new ApiResponse(
             200,
-            data,
+            propertyList,
             "preperty data fetched successfully"
         )
     )

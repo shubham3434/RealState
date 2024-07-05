@@ -7,7 +7,7 @@ import Layout from './components/Layout'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Home from './pages/Home'
 import Container from './components/Container'
-import Propertylistings from './pages/PropertyDetails'
+import Propertylistings from './pages/PropertyLiisting.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
