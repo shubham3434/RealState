@@ -9,6 +9,7 @@ import Propertylistings from './pages/PropertyLiisting.jsx'
 import PropertyDetails from './pages/Propertydeatils.jsx'
 import Search from './pages/Search.jsx'
 import SignupPage from './pages/SignupPage.jsx'
+import AddProperty from './pages/AddProperty.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
       <Route path='property' element={<Layout/>}>
         <Route path='listings' element={<Propertylistings/>}/>
         <Route path='details/:id' element={<PropertyDetails/>}/>
+        <Route path='add' element={<AddProperty/>}/>
       </Route>
     </Route>
   ))

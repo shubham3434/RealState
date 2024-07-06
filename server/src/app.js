@@ -8,7 +8,8 @@ const app = express()
 
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
-    credentials:true
+    credentials:true,
+    same_site:'none'
 }))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

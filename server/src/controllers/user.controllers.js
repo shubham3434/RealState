@@ -46,6 +46,7 @@ const generateAccessAndRefreshTokens = async(userid)=>{
 
 const loginUser = asyncHandler(async(req,res)=>{
     const {username , email , password } = req.body
+    
     if(!username || !password || !email) throw new ApiError(401,"All feilds are required")
     
     const user = await User.findOne({username})
@@ -59,7 +60,8 @@ const loginUser = asyncHandler(async(req,res)=>{
 
     const options = {
         httpOnly:true,
-        secure:true
+        secure:true,
+        same_site:"none"
     }
 
     return res.status(200)
@@ -101,19 +103,23 @@ const addPropertylisting = asyncHandler(async(req,res)=>{
     
     
     const {title, location ,propertyType,price,bedrooms,bathrooms,description} = req.body
+   
     if(!title || !location || !propertyType || !price ) throw new ApiError(401,"All feilds required")
-    
+    // console.log(req.files)
     const exixtingProperty = await Property.findOne({title})
     if(exixtingProperty) throw new ApiError (400,"this propety Already exixits")
     let images=[]
     if(req.files){
         for(const file of req.files){
+            // console.log("inside files loop");
             const path = file?.path
+            // console.log("paths is ",path);
             const res = await uploadOnCloudinary(path)
+            // console.log(res);
             images.push(res)
         }
     }
-   
+   console.log(images);
     const property = await Property.create({
         title,
         location,
@@ -151,6 +157,18 @@ const removePropertyListing = asyncHandler (async(req,res)=>{
     )
 })
 
+const getUserListings = asyncHandler(async(req,res)=>{
+    const data = await Property.find({seller:req.user?._id})
+    return res.status(200)
+    .json(
+        new ApiResponse(
+            200,
+            data,
+            "userListings fetched successfully"
+        )
+    )
+})
+
 
 
 
@@ -159,5 +177,6 @@ export {
     loginUser,
     logoutUser,
     addPropertylisting,
-    removePropertyListing
+    removePropertyListing,
+    getUserListings
 }

@@ -22,11 +22,17 @@ const Preview = function(){
             method:'POST',
             headers:{
                 // 'Content-type': "multipart/form-data"
+                
             },
+            credentials:'include',
             body:formData
-        }).then(res => res.json())
+        }).then(res => {
+            console.log(res)
+            return res.json()})
         .catch(err => console.log(err))
         
+       
+
         setEmail("")
         setPassword("")
         setUserName("")
