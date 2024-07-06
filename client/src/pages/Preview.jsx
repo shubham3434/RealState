@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import homeImage from '../assets/home.svg'
 import deal from '../assets/deal.svg'
 import { FaHome } from "react-icons/fa";
-
+import {useNavigate} from 'react-router-dom'
 const Preview = function(){
+
+    const [userName,setUserName] = useState("");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const navigate = useNavigate()
+    const [message,setmessage] = useState(false)
+
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append("username",userName)
+        formData.append("email",email)
+        formData.append("password",password)
+
+        const response = await fetch(`http://localhost:3000/api/v1/user/login`,{
+            method:'POST',
+            headers:{
+                // 'Content-type': "multipart/form-data"
+            },
+            body:formData
+        }).then(res => res.json())
+        .catch(err => console.log(err))
+        
+        setEmail("")
+        setPassword("")
+        setUserName("")
+
+        // console.log(response);
+
+        if(response && response.statuscode == 200){
+            setmessage(false)
+            navigate(`/user/home`)
+        }
+        else{
+            setmessage(true)
+        }
+    }
+
+    const  handleSignup = ()=>{
+        // e.preventDefault()
+        navigate('/user/signup')
+       }
+
  return(
     <div>
 
@@ -43,16 +86,16 @@ const Preview = function(){
                             <p className="m-2 p-2 ">password: </p>
                         </div>
                         <div className="c">
-                            <input type="text" className="m-2 border py-2 rounded  border-gray-300"/>
-                            <input type="text" className="m-2 py-2 rounded  border border-gray-300" />
-                            <input type="text" className="m-2 py-2 rounded border   border-gray-300"/>
+                            <input type="text" value={userName} onChange={(e)=>{setUserName(e.target.value)}} className="m-2 border py-2 rounded  border-gray-300"/>
+                            <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="m-2 py-2 rounded  border border-gray-300" />
+                            <input type="text" value={password} onChange={(e)=>{setPassword(e.target.value)}} className="m-2 py-2 rounded border   border-gray-300"/>
                         </div>
                     </div>
-                    <div className="flex justify-center my-3 "><button className="p-2 mx-2 w-32 hover:bg-blue-300 bg-blue-200 rounded">Login</button></div>
+                    <div className="flex justify-center my-3 "><button onClick={handleSubmit} className="p-2 mx-2 w-32 hover:bg-blue-300 bg-blue-200 rounded">Login</button></div>
+                    {message && <div className="text-red-700 text-center">Incorrect username or password </div>}
                     <div className="flex justify-center my-3 items-center">
-                        <p>Dont have an account ?</p> <button className="p-2 mx-2 hover:bg-blue-300 bg-blue-200 rounded ">Signup</button>
+                        <p>Dont have an account ?</p> <button onClick={handleSignup} className="p-2 mx-2 hover:bg-blue-300 bg-blue-200 rounded ">Signup</button>
                     </div>
-                   
                 </form>
             </div>
         </div>

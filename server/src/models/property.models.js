@@ -39,5 +39,9 @@ const PropertySchema = new Schema({
     }
 },{timestamps:true})
 
+
+PropertySchema.index({location:"text",price:"text"})
+
+
 export const  Property = mongoose.model("Property",PropertySchema)
 

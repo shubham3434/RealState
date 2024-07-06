@@ -8,7 +8,7 @@ import {Property} from '../models/property.models.js'
 const registerUser = asyncHandler(async(req,res)=>{
     const {fullname , username , email , password , role} = await req.body
     if(
-        (!fullname || !username || !password || !email || !role)
+        (!fullname || !username || !password || !email )
     ){
         throw new ApiError(401,"all feilds are required")
     }
@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async(req,res)=>{
         email:email,
         username:username,
         password:password,
-        role:role,
+        role:"user",
     })
 
     const createdUser = await User.findById(user._id).select("-password")

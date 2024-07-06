@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import image1 from '../assets/luxaryRoom.jpg'
 import image2 from '../assets/buildings.jpg'
 import image3 from '../assets/smallhome.jpg'
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Home(){
+
+    const [locationFeild,setLoactionFeild] = useState("")
+    
+const navigate = useNavigate()
+const search = ()=>{
+    const location = locationFeild
+    setLoactionFeild("")
+    navigate(`/user/search/${location}`)
+}
+
 return (
     <div>
         <div className="h-[650px] bg-cover bg-bottom  " style={{backgroundImage:`url(${image2})`}} >
@@ -21,8 +32,8 @@ return (
                 <option value="Apartments">Apartments</option>
                 </select>
                 <label htmlFor="" className="text-white text-3xl p-4">Location</label>
-                <input type="text" className="p-2 w-60 rounded" placeholder="City"/>
-                <button className="text-white text-xl p-2 bg-blue-300 w-40 m-4 hover:bg-blue-500 rounded">Search</button>
+                <input value={locationFeild} onChange={(e)=>{setLoactionFeild(e.target.value)}} type="text" className="p-2 w-60 rounded" placeholder="City"/>
+                <button onClick={search} className="text-white text-xl p-2 bg-blue-300 w-40 m-4 hover:bg-blue-500 rounded">Search</button>
                 </div>
                 </div>
             </div>
