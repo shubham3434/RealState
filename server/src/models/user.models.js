@@ -28,6 +28,9 @@ const userSchema = new Schema({
     refreshToken:{
         type:String,
     },
+    image:{
+        type:String
+    }
 },{timestamps:true})
 
 userSchema.pre("save",async function(next){

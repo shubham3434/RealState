@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Home(){
 
     const [locationFeild,setLoactionFeild] = useState("")
-
+    
 const navigate = useNavigate()
 const search = ()=>{
     const location = locationFeild

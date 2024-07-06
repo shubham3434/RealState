@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image1 from "../assets/propertyImages/image1.jpg"
+
 import { useNavigate } from "react-router-dom";
 
 function Propertylistings(){

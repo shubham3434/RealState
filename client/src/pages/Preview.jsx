@@ -42,6 +42,11 @@ const Preview = function(){
         }
     }
 
+    const  handleSignup = ()=>{
+        // e.preventDefault()
+        navigate('/user/signup')
+       }
+
  return(
     <div>
 
@@ -87,9 +92,9 @@ const Preview = function(){
                         </div>
                     </div>
                     <div className="flex justify-center my-3 "><button onClick={handleSubmit} className="p-2 mx-2 w-32 hover:bg-blue-300 bg-blue-200 rounded">Login</button></div>
-                    {message && <div className="text-red-700 text-center">User Not found !!</div>}
+                    {message && <div className="text-red-700 text-center">Incorrect username or password </div>}
                     <div className="flex justify-center my-3 items-center">
-                        <p>Dont have an account ?</p> <button className="p-2 mx-2 hover:bg-blue-300 bg-blue-200 rounded ">Signup</button>
+                        <p>Dont have an account ?</p> <button onClick={handleSignup} className="p-2 mx-2 hover:bg-blue-300 bg-blue-200 rounded ">Signup</button>
                     </div>
                 </form>
             </div>

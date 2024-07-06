@@ -8,6 +8,7 @@ import Container from './components/Container'
 import Propertylistings from './pages/PropertyLiisting.jsx'
 import PropertyDetails from './pages/Propertydeatils.jsx'
 import Search from './pages/Search.jsx'
+import SignupPage from './pages/SignupPage.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       <Route path='user' element={<Layout/>}>
            <Route path='home' element={<Home/>}></Route>
            <Route path='search/:location' element ={<Search/>}/>
+           <Route path='signup' element={<SignupPage/>}/>
       </Route>
       <Route path='property' element={<Layout/>}>
         <Route path='listings' element={<Propertylistings/>}/>
