@@ -5,7 +5,6 @@ import { User } from '../models/user.models.js'
 
 const verifyJWT = asyncHandler(async (req,res,next)=>{
     const token = req.cookies?.accessToken
-    
     if(!token) throw new ApiError (403,"UnAuthorized Access")
     const decodedToken = jwt.decode(token)
     const user = await User.findById(decodedToken?._id).select("-password -refreshToken")

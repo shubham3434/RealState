@@ -119,7 +119,7 @@ const addPropertylisting = asyncHandler(async(req,res)=>{
             images.push(res)
         }
     }
-   console.log(images);
+
     const property = await Property.create({
         title,
         location,

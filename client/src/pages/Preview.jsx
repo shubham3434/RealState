@@ -9,6 +9,8 @@ const Preview = function(){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate()
+    const[error,setError] = useState(false)
+    const [errorMessage,setErrorMessage] = useState("Something went wrong")
     const [message,setmessage] = useState(false)
 
     const handleSubmit = async (e)=>{
@@ -22,34 +24,35 @@ const Preview = function(){
             method:'POST',
             headers:{
                 // 'Content-type': "multipart/form-data"
-                
             },
             credentials:'include',
             body:formData
-        }).then(res => {
-            console.log(res)
-            return res.json()})
-        .catch(err => console.log(err))
-        
-       
+        })
+        .catch(err => {
+            console.log(err);
+        })
 
         setEmail("")
         setPassword("")
         setUserName("")
-
         // console.log(response);
-
-        if(response && response.statuscode == 200){
+        if(response && response.status == 200){
             setmessage(false)
             navigate(`/user/home`)
+            setError(false)
+        }
+        else if(response.status == "402"){
+            setError(true)
+            setErrorMessage("Incorrect Password")
+            setmessage(true)
         }
         else{
-            setmessage(true)
+            setError(true)
+            setErrorMessage("user does not exists")
         }
     }
 
     const  handleSignup = ()=>{
-        // e.preventDefault()
         navigate('/user/signup')
        }
 
@@ -58,7 +61,7 @@ const Preview = function(){
 
     <div className="flex gap-3 items-center p-3 rounded ">
        <FaHome size={30} color=""/>
-        <p className="font-semibold text-xl">RaelStateHub</p>
+        <p className="font-semibold text-xl">RealStateHub</p>
     </div>
 
     <div className="flex bg-blue-100 ">
@@ -98,7 +101,7 @@ const Preview = function(){
                         </div>
                     </div>
                     <div className="flex justify-center my-3 "><button onClick={handleSubmit} className="p-2 mx-2 w-32 hover:bg-blue-300 bg-blue-200 rounded">Login</button></div>
-                    {message && <div className="text-red-700 text-center">Incorrect username or password </div>}
+                    {error && <div className="text-red-700 text-center">{errorMessage} </div>}
                     <div className="flex justify-center my-3 items-center">
                         <p>Dont have an account ?</p> <button onClick={handleSignup} className="p-2 mx-2 hover:bg-blue-300 bg-blue-200 rounded ">Signup</button>
                     </div>
