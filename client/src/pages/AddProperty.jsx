@@ -17,7 +17,7 @@ function AddProperty(){
             credentials:"include",
         }).then(res => res.json())
         .then(res => {setUserListings(res.data) 
-                        console.log(res)})
+                        })
         .catch(err => console.log(err))
         setLoading(true)
     },[api])
