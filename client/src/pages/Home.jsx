@@ -11,9 +11,11 @@ function Home(){
     
 const navigate = useNavigate()
 const search = ()=>{
+    if(locationFeild){
     const location = locationFeild
     setLoactionFeild("")
     navigate(`/user/search/${location}`)
+    }
 }
 
 return (

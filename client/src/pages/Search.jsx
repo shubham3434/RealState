@@ -5,9 +5,12 @@ function Search(){
     const [searchFeildValue,setSearchFeildValue] = useState("")
     const [searchData,setSearchData] = useState([])
     const [loading,setLoading] = useState(true)
+    const [error,setError] = useState(false)
+    const [errorMessage,setErrorMessage] = useState("something went wrong")
+
     const {location} = useParams()
     
-    useEffect(()=>{
+    useEffect(  ()=>{
         setLoading(true)
         setSearchFeildValue(location)
         fetch(`http://localhost:3000/api/v1/property/search/location`,{
@@ -17,7 +20,13 @@ function Search(){
             },
             body:JSON.stringify({"location":location})
         }).then(res => res.json())
-        .then(res => setSearchData(res.data))
+        .then(res => {setSearchData(res.data)
+            if(res.data?.length ==0){
+                setError(true)
+                setErrorMessage("No data found !!")
+            }
+            else setError(false)
+        })
         setLoading(false)
     },[])
 
@@ -33,7 +42,14 @@ function Search(){
             body:JSON.stringify({"location":searchFeildValue})
         }).then(res => res.json())
         .then(res => {setSearchData(res.data)
-        })
+       
+        if(res.data?.length ==0){
+            setError(true)
+            setErrorMessage("No data found !!!")
+        }
+        else setError(false)
+    }
+    )
     }
         setSearchFeildValue("")
         setLoading(false)
@@ -47,6 +63,9 @@ function Search(){
 
     return (
         <div>
+
+           
+
             <div className="flex justify-center my-12">
                <input type="text"
                 value={searchFeildValue}
@@ -56,6 +75,10 @@ function Search(){
                 />
                <button onClick={getData} className="p-2 text-white text-lg  w-40 rounded bg-blue-300 hover:bg-blue-400">Search</button>
             </div>
+
+            {error && <div className="text-xl text-center text-red-500">
+                {errorMessage}
+                </div>}
 
             
             <div className="flex justify-center  p-4 ">

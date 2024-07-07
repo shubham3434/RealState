@@ -8,6 +8,7 @@ function AddProperty(){
     const {register,handleSubmit,reset} = useForm()
     const [api,setApi] = useState(true)
     const [loading,setLoading] = useState(false)
+    const [wait,setWait] = useState(false)
 
     useEffect(()=>{
         setLoading(false)
@@ -30,6 +31,7 @@ function AddProperty(){
    
 
     const AddProp = async function(data){
+        setWait(true)
         // console.log(data);
         const formData = new FormData()
         formData.append("title",data.title)
@@ -56,10 +58,11 @@ function AddProperty(){
         }
         reset()
         setApi((prev)=>!prev)
+        setWait(false)
     }
 
     
-
+    if(wait) return <div>Wait......</div>
 
 
     return(

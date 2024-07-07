@@ -58,10 +58,11 @@ return (
                 <div className="text-center text-xl">email</div>
                 <div><input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="w-full rounded p-2 border-2 border-gray-200" /></div>
             </div>
+            {error &&  <div className="text-center text-red-700 text-xl">user Alredy exsists !!!! </div> }
+
             <div className="flex justify-center my-4"    >
                 <button onClick={handleSubmit} className="bg-blue-300 hover:bg-blue-600 rounded-lg text-xl text-white p-2 w-72">Signup</button>
             </div>
-            {error &&  <div className="text-center text-red-400">user Alredy exsists </div> }
         </form>
         </div>
     </div>
