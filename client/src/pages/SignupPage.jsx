@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import image1 from '../assets/signup1.png'
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 
 function SignupPage(){
-
     const [fullname,setFullName] = useState("")
     const [username,setUsername] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [error,setError] = useState(false)
+    const [errormessage,setErrorMessage] = useState("Something went wrong")
 
     const navigate = useNavigate()
     const handleSubmit = async function(e){
@@ -23,21 +24,18 @@ function SignupPage(){
             const response = await fetch("http://localhost:3000/api/v1/user/register",{
                 method:'POST',
                 body:formData
-            }).then(res => res.json())
-              .catch(err => console.log(err))
-        
-        console.log(response)
-        if(response?.statuscode == 200){
+            })
+            if(response.status==200){
                 navigate(`/`)
-         }
-         else{
-            setError(true)
-         }
-
+            }
+            else{
+                setError(true);
+                if(response.status==401) setErrorMessage("All feilds required")
+                if(response.status==402) setErrorMessage("user Already exists")
+            }
     }
-   
-
 return (
+    <div>
     <div className="flex justify-center items-center bg-contain  h-screen " style={{backgroundImage:`url(${image1})`}}>
         <div className="w-1/3 p-4 m-8 rounded-lg bg-white/60 h-[500px] shadow-xl ">
         <form action="">
@@ -58,13 +56,15 @@ return (
                 <div className="text-center text-xl">email</div>
                 <div><input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="w-full rounded p-2 border-2 border-gray-200" /></div>
             </div>
-            {error &&  <div className="text-center text-red-700 text-xl">user Alredy exsists !!!! </div> }
+            {error &&  <div className="text-center text-red-700 text-xl">{errormessage} </div> }
 
             <div className="flex justify-center my-4"    >
                 <button onClick={handleSubmit} className="bg-blue-300 hover:bg-blue-600 rounded-lg text-xl text-white p-2 w-72">Signup</button>
             </div>
         </form>
         </div>
+    </div>
+    <Footer/>
     </div>
 )
 }

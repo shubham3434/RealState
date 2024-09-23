@@ -20,13 +20,14 @@ function App() {
       <Route path='user' element={<Layout/>}>
            <Route path='home' element={<Home/>}></Route>
            <Route path='search/:location' element ={<Search/>}/>
-           <Route path='signup' element={<SignupPage/>}/>
+           {/* <Route path='signup' element={<SignupPage/>}/> */}
       </Route>
       <Route path='property' element={<Layout/>}>
         <Route path='listings' element={<Propertylistings/>}/>
         <Route path='details/:id' element={<PropertyDetails/>}/>
         <Route path='add' element={<AddProperty/>}/>
       </Route>
+      <Route path='signup' element={<SignupPage/>}/>
     </Route>
   ))
 

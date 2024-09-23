@@ -53,7 +53,8 @@ const Preview = function(){
     }
 
     const  handleSignup = ()=>{
-        navigate('/user/signup')
+        // navigate('/user/signup')
+        navigate('/signup')
        }
 
  return(

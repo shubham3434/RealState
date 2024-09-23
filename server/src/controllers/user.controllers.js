@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async(req,res)=>{
         email:email,
         username:username,
         password:password,
-        role:"user",
+        role:"user"
     })
 
     const createdUser = await User.findById(user._id).select("-password")
