@@ -87,6 +87,11 @@ const searchPropertyByprice = asyncHandler(async(req,res)=>{
     )
 })
 
+const deleteProperty= async(req,res)=>{
+
+}
+
+
 export {getAllProperties,
     getPropertyDetails,
     searchPropertyByLocation,

@@ -10,7 +10,6 @@ import {
 import { verifyJWT } from "../middlewars/auth.middlewares.js";
 import {upload} from '../middlewars/multer.middlewares.js'
 
-
 const router = Router()
 
 router.route('/register').post(upload.none(),registerUser)

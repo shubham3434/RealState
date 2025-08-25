@@ -76,6 +76,7 @@ const loginUser = asyncHandler(async(req,res)=>{
 const logoutUser = asyncHandler(async(req,res)=>{
     const userid = req.user?._id
     if(!userid) throw new ApiError(401,"unauthorizrd Access")
+    
     const user = await User.findByIdAndUpdate(
         userid,
         {
@@ -101,9 +102,9 @@ const logoutUser = asyncHandler(async(req,res)=>{
 
 const addPropertylisting = asyncHandler(async(req,res)=>{
     
-    
     const {title, location ,propertyType,price,bedrooms,bathrooms,description} = req.body
-   
+    // console.log(req.user);
+    
     if(!title || !location || !propertyType || !price ) throw new ApiError(401,"All feilds required")
     // console.log(req.files)
     const exixtingProperty = await Property.findOne({title})

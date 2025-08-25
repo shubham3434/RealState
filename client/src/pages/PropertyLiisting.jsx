@@ -24,6 +24,7 @@ function Propertylistings(){
     if(loading) return(
       <div>Loading.......</div>
     )
+    
 
     return (
         <div className="flex justify-center bg-gray-200  p-4 ">

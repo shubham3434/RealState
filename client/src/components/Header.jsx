@@ -13,7 +13,6 @@ const handleLogout= async ()=>{
     console.log(response);
     if(response?.statuscode == 200){
         navigate(`/`)
-       
     }
 }
 

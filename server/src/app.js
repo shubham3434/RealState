@@ -18,7 +18,6 @@ app.use(cookieParser())
 import userRouter from './routes/user.routes.js'
 import propertyRouter from './routes/property.routes.js'
 
-
 // routes declaration
 app.use('/api/v1/user',userRouter)
 app.use('/api/v1/property',propertyRouter)
